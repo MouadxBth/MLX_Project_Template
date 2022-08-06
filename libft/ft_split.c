@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 13:54:39 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/02/20 14:17:40 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:22:24 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,6 @@ static inline void	ft_skip_delim(const char *str, size_t *index, int delim)
 {
 	while (str[*index] && str[*index] == delim)
 		*index = *index + 1;
-}
-
-static size_t	ft_wordcount(const char *str, int delim)
-{
-	size_t	count;
-	int		is_word;
-
-	count = 0;
-	is_word = 0;
-	while (*str)
-	{
-		if (*str == delim)
-			is_word = 0;
-		else if (!is_word)
-		{
-			is_word = 1;
-			count++;
-		}
-		str++;
-	}
-	return (count);
 }
 
 static size_t	ft_wordlen(const char *str, size_t start, int delim)
@@ -72,7 +51,7 @@ char	**ft_split(const char *str, char c)
 
 	if (!str)
 		return (NULL);
-	words = ft_wordcount(str, c);
+	words = ft_words(str, c);
 	result = (char **)malloc(sizeof(char *) * (words + 1));
 	if (result != NULL)
 	{
