@@ -6,7 +6,7 @@
 #    By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/20 15:36:27 by mbouthai          #+#    #+#              #
-#    Updated: 2022/08/06 01:10:13 by mbouthai         ###   ########.fr        #
+#    Updated: 2022/08/06 02:42:29 by mbouthai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,13 +38,14 @@ RMDIR	:= rmdir
 
 CC	:= gcc
 
-CFLAGS	:= -Wall -Werror -Wextra -O3 -I$(INC_DIR) $(EXTERN)
+CFLAGS	:= -Wall -Werror -Wextra -g -I$(INC_DIR) $(EXTERN)
 
 LFLAGS	:= -L./libft -L./ft_printf -L./minilibx-linux -lft -lftprintf -lmlx_Linux -lXext -lX11 -lm -lz
 
-INC_FS	:= main.h
+INC_FS	:= fdf.h
 
-SRC_FS	:= main.c
+SRC_FS	:= fdf.c fdf_utils.c fdf_init.c fdf_map_parsing.c fdf_map_projection.c \
+		fdf_point_utils.c fdf_map_rendering.c fdf_vector_utils.c fdf_key_handling.c
 
 INCS	= $(addprefix $(INC_DIR), $(INC_FS))
 

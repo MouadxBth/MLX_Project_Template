@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   fdf_key_handling.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/26 14:53:30 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/07/26 15:30:54 by mbouthai         ###   ########.fr       */
+/*   Created: 2022/07/30 21:16:46 by mbouthai          #+#    #+#             */
+/*   Updated: 2022/08/05 22:46:22 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#include <mlx.h>
+#include "fdf.h"
 
-# include "libft.h"
-# include "ft_printf.h"
-# include "get_next_line.h"
+int	handle_keys(int key, t_fdf *info)
+{
+	ft_printf("%d\n", key);
+	(void) info;
 
-#endif
+	return (0);
+}

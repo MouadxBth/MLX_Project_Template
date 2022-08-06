@@ -6,7 +6,7 @@
 /*   By: mbouthai <mbouthai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 23:32:23 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/01/27 16:32:52 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:21:52 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 
 char	*ft_strtrim(char const *s1, char const *set);
+size_t	ft_words(const char *str, int delim);
 char	**ft_split(char const *s, char c);
 
 char	*ft_itoa(int n);
