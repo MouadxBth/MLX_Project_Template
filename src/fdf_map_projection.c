@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 01:25:06 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/08/06 17:42:20 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/08/07 19:04:13 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ void	isometric(t_point *point, float angle)
 	y = point->y;
 	//point->x = (x - y) * cos(angle);
 	//point->y = (x + y) * sin(angle)  - point->z;
-	point->x = x - y;
-	point->y = y + x - point->z;
-	(void)angle;
+	//point->x = x - y;
+	//point->y = y + x - point->z;
+	point->x = (x * cos(angle) - y * sin(angle)) *2;
+	point->y = (x * sin(angle) + y * cos(angle)) - point->z;
 }
 
 void	rotate(t_point *point, t_camera *camera)
@@ -48,7 +49,6 @@ t_point	project_point(t_point point, t_fdf *info)
 	rotate(&point, &info->camera);
 	altitude(&point, &info->camera);
 	isometric(&point, info->camera.iso_angle);
-	ft_printf("X: %3i Y: %3i Z: %3i\n", point.x, point.y, point.z);
 	offset_point(&point, info->map.x_offset, info->map.y_offset);
 	return (point);
 }

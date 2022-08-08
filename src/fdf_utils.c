@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 21:05:28 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/08/06 16:58:44 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/08/07 18:20:38 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,19 @@
 #include <mlx.h>
 #include "fdf.h"
 
-void	quit(t_fdf *info)
-{
-	int	index;
 
-	index = -1;
+void	error(char *msg)
+{
+//	int	index;
+
+	if (msg)
+		ft_printf("[ERROR]: %s\n", msg);
+/*	index = -1;
 	while (++index < info->map.height)
 		free(info->map.matrix[index]);
 	free(info->map.matrix);
 	mlx_destroy_image(info->mlx, info->image.id);
-	mlx_destroy_window(info->mlx, info->mlx_window);
-	exit(0);
-}
-
-void	error(char *msg)
-{
-	if (msg)
-		ft_printf("[ERROR]: %s\n", msg);
+	mlx_destroy_window(info->mlx, info->mlx_window);*/
 	exit(-1);
 }
 

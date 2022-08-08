@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 01:23:48 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/08/06 17:19:41 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/08/07 23:25:49 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@
 
 static void	pixel_put(t_image *img, int x, int y, int color)
 {
-	char	*dst;
+	int	index;
 
-	if ((x >= 0 && x <= W_WIDTH) && (y >= 0 && y <= W_HEIGHT))
-	{
-		dst = img->address + (y * img->line_length + x * (img->bits_per_pixel / 8));
-		*(unsigned int*)dst = color;
-	}
+	index =  (y * img->line_length + x * (img->bits_per_pixel / 8));
+	img->address[index] = color;
+	img->address[++index] = color >> 8;
+	img->address[++index] = color >> 16;
 }
 
 void	draw(t_vector *vector, t_fdf *info)
@@ -30,12 +29,14 @@ void	draw(t_vector *vector, t_fdf *info)
 	int	error;
 	int	color;
 
-	color = 0xffffff;
-	if (vector->start.z || vector->end.z)
-		color = 0xff0000;
+	color = 0xff0000;
+	if (vector->start.z >= info->camera.altitude_threshold || vector->end.z >= info->camera.altitude_threshold)
+		color = 0xffffff;
 	while (1)
 	{
-		pixel_put(&info->image, vector->start.x, vector->start.y, color);
+		if ((vector->start.x >= 0 && vector->start.x <= W_WIDTH) &&
+			(vector->start.y >= 0 && vector->start.y <= W_HEIGHT))
+			pixel_put(&info->image, vector->start.x, vector->start.y, color);
 		if (is_point(vector))
 			break ;
 		error = vector->delta.z * 2;

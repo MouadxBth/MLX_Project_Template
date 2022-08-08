@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 21:06:58 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/08/06 17:35:16 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/08/07 23:44:27 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	init_map(t_fdf_map *map, char *file)
 		error("Could not initialize map");
 	map->width = ft_file_columns(file);
 	map->height = ft_file_rows(file);
-	map->scale = 20;
-	map->x_offset = (W_WIDTH - (map->width * map->scale)) / 2;
-	map->y_offset = (W_HEIGHT - (map->height * map->scale)) / 2;
+	map->scale = 1;
+	map->x_offset = 0;/*(W_WIDTH - (map->width * map->scale)) / 2;*/
+	map->y_offset = 0;/*(W_HEIGHT - (map->height * map->scale)) / 2;*/
 	map->matrix = (t_point **)calloc(map->height, sizeof(t_point *));
 	if (!map->matrix)
 		error("Could not allocate enough memory for fdf map");
@@ -62,5 +62,5 @@ void	init_camera(t_camera *camera)
 	camera->axis_angle = 0;
 	camera->ordinate_angle = 0;
 	camera->altitude_angle = 0;
-	camera->iso_angle = 0.523599;
+	camera->iso_angle = (1.0 / 4.0) * 3.14;
 }
