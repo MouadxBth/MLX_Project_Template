@@ -6,27 +6,31 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 01:09:26 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/08/06 16:59:31 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:05:38 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "fdf.h"
 
-static void	fill_map_matrix_row(t_point *matrix, char *str, int row)
+static void	fill_map_matrix_row(t_fdf_map *map, char *str, int row)
 {
 	int		column;
 	char	**values;
 
-	if (!str || !matrix)
+	if (!str || !map)
 		return ;
 	column = -1;
 	values = ft_split(str, ' ');
 	while (values[++column])
 	{
-		matrix[column].x = column;
-		matrix[column].y = row;
-		matrix[column].z = ft_atoi(values[column]);
+		map->matrix[row][column].x = column;
+		map->matrix[row][column].y = row;
+		map->matrix[row][column].z = ft_atoi(values[column]);
+		if (map->matrix[row][column].z > map->z_max_orig)
+			map->z_max_orig = map->matrix[row][column].z;
+		else if (map->matrix[row][column].z < map->z_min_orig)
+			map->z_min_orig = map->matrix[row][column].z;
 		free(values[column]);
 	}
 	free(values);
@@ -63,11 +67,10 @@ void	parse_map(t_fdf_map *map, char *file)
 	while (line)
 	{
 		line = get_next_line(fd);
-		fill_map_matrix_row(map->matrix[row], line, row);
+		fill_map_matrix_row(map, line, row);
 		if (line)
 			row++;
 		free(line);
 	}
 	close(fd);
-	ft_printf("Rows: %i Columns: %i\n", map->height, map->width);
 }

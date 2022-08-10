@@ -6,7 +6,7 @@
 /*   By: mbouthai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 01:43:33 by mbouthai          #+#    #+#             */
-/*   Updated: 2022/08/06 17:16:03 by mbouthai         ###   ########.fr       */
+/*   Updated: 2022/08/08 22:36:03 by mbouthai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ static int	ft_abs(int x)
 	return (x);
 }
 
-int	is_point(t_vector *vector)
+int	point_collision(t_point *start, t_point *end)
 {
-	return (vector->start.x == vector->end.x &&
-		vector->start.y == vector->end.y);
+	return (start->x == end->x && start->y == end->y);
 }
 
 t_vector	new_vector(t_point start, t_point end)
 {
 	t_vector	result;
+
 	result.start = start;
 	result.end = end;
 	result.delta.x = ft_abs(end.x - start.x);
